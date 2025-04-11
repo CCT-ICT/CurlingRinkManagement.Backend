@@ -9,9 +9,8 @@ public class Contact : IDatabaseEntity
     public string FirstName { get; set; } = string.Empty;
     public string Prefix { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-
     public string AdditionalInfo { get; set; } = string.Empty;
-
+    public DateTime DateAdded { get; set; } = DateTime.Now;
 
     public List<Label>? Labels { get; set; }
 }
