@@ -1,7 +1,6 @@
-﻿
-using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Planner.Data.Enums;
+using CurlingRinkManagement.Planner.Data.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
 
 namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
 public class CustomerRequest : IDatabaseEntity
@@ -13,14 +12,13 @@ public class CustomerRequest : IDatabaseEntity
     public string AdditionalInfo { get; set; } = string.Empty;
     public string? CustomPriceReason { get; set; } = string.Empty;
     public float CustomPrice { get; set; } = 0f;
+    public CustomerRequestState CustomerRequestState { get; set; }
 
 
     [ForeignKey("Contact")]
     public Guid ContactId { get; set; }
     public Contact? Contact { get; set; }
 
-    [ForeignKey("Activity")]
-    public Guid ActivityId { get; set; }
     public Activity? Activity { get; set; }
 
 }

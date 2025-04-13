@@ -1,7 +1,7 @@
-﻿using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Planner.Data.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CurlingRinkManagement.Planner.Domain.DatabaseModels
+namespace CurlingRinkManagement.Planner.Data.DatabaseModels
 {
     public class SheetActivity : IDatabaseEntity
     {

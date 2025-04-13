@@ -1,4 +1,5 @@
-﻿using CurlingRinkManagement.Planner.Domain.DatabaseModels;
+﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
+using CurlingRinkManagement.Planner.Data.DatabaseModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace CurlingRinkManagement.Planner.Business.Database;
@@ -24,5 +25,9 @@ public class DataContext : DbContext
     public DbSet<DateTimeRange> DateTimeRanges { get; set; }
     public DbSet<Sheet> Sheets { get; set; }
     public DbSet<ActivityType> ActivityTypes { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<CustomerRequest> CustomerRequests { get; set; }
+
 }
 

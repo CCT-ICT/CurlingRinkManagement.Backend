@@ -1,6 +1,6 @@
-﻿using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Planner.Data.Interfaces;
 
-namespace CurlingRinkManagement.Planner.Domain.DatabaseModels;
+namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
 
 public class Sheet : IDatabaseEntity
 {

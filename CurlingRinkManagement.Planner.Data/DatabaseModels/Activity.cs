@@ -1,7 +1,8 @@
-﻿using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
+using CurlingRinkManagement.Planner.Data.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CurlingRinkManagement.Planner.Domain.DatabaseModels;
+namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
 
 public class Activity : IDatabaseEntity
 {
@@ -15,6 +16,10 @@ public class Activity : IDatabaseEntity
     [ForeignKey("ActivityType")]
     public Guid ActivityTypeId { get; set; }
     public ActivityType? ActivityType { get; set; } = null;
+
+    [ForeignKey("CustomerRequest")]
+    public Guid? CustomerRequestId { get; set; }
+    public CustomerRequest? CustomerRequest { get; set; } = null;
 
 }
 

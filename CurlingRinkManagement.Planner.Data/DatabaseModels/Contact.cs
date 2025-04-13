@@ -1,4 +1,4 @@
-﻿using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Planner.Data.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
@@ -12,6 +12,6 @@ public class Contact : IDatabaseEntity
     public string AdditionalInfo { get; set; } = string.Empty;
     public DateTime DateAdded { get; set; } = DateTime.Now;
 
-    public List<Label>? Labels { get; set; }
+    public List<Tag>? Tags { get; set; }
 }
 

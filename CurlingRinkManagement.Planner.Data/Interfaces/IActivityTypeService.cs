@@ -1,6 +1,6 @@
-﻿using CurlingRinkManagement.Planner.Domain.DatabaseModels;
+﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
 
-namespace CurlingRinkManagement.Planner.Domain.Interfaces;
+namespace CurlingRinkManagement.Planner.Data.Interfaces;
 
 public interface IActivityTypeService
 {

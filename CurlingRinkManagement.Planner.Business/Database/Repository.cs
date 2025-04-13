@@ -1,4 +1,4 @@
-﻿using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Planner.Data.Interfaces;
 
 namespace CurlingRinkManagement.Planner.Business.Database;
 

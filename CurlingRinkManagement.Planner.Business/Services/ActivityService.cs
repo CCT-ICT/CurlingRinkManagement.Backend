@@ -1,5 +1,5 @@
-﻿using CurlingRinkManagement.Planner.Domain.DatabaseModels;
-using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
+using CurlingRinkManagement.Planner.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace CurlingRinkManagement.Planner.Business.Services;

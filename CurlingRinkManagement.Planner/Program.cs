@@ -1,6 +1,6 @@
 using CurlingRinkManagement.Planner.Business.Database;
 using CurlingRinkManagement.Planner.Business.Services;
-using CurlingRinkManagement.Planner.Domain.Interfaces;
+using CurlingRinkManagement.Planner.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
