@@ -1,11 +1,11 @@
-﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
-using CurlingRinkManagement.Planner.Data.Interfaces;
+﻿using CurlingRinkManagement.Common.Data.Database;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
 
-public class Activity : IDatabaseEntity
+public class Activity : IClubEntity
 {
+    public Guid ClubId { get; set; } = Guid.Empty;
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Title { get; set; } = string.Empty;
 

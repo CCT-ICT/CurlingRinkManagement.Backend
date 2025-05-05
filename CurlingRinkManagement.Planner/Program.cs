@@ -1,5 +1,7 @@
-using CurlingRinkManagement.Planner.Business.Database;
+using CurlingRinkManagement.Common.Api.Extensions;
+using CurlingRinkManagement.Common.Data.Database;
 using CurlingRinkManagement.Planner.Business.Services;
+using CurlingRinkManagement.Planner.Data.Database;
 using CurlingRinkManagement.Planner.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,14 +14,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContextPool<DataContext>(opt =>
-    opt.UseNpgsql(
-        builder.Configuration.GetConnectionString("Database")));
+builder.Services.AddDatabase<PlannerDataContext>(builder.Configuration);
 
 builder.Services.AddScoped<IActivityService, ActivityService>();
 builder.Services.AddScoped<ISheetService, SheetService>();
 builder.Services.AddScoped<IActivityTypeService, ActivityTypeService>();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 //Make Cors stricter at some point
 builder.Services.AddCors(options =>

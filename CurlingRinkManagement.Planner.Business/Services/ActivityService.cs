@@ -1,10 +1,11 @@
-﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
+﻿using CurlingRinkManagement.Common.Data.Database;
+using CurlingRinkManagement.Planner.Data.DatabaseModels;
 using CurlingRinkManagement.Planner.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace CurlingRinkManagement.Planner.Business.Services;
 
-public class ActivityService(IRepository<Activity> _activityRepository) : IActivityService
+public class ActivityService(IClubRepository<Activity> _activityRepository) : IActivityService
 {
     public Activity Create(Activity activity)
     {
