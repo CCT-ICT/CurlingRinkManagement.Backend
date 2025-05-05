@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CurlingRinkManagement.Planner.Business.Migrations
+namespace CurlingRinkManagement.Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDataContext))]
     [Migration("20250413202122_AddedContactsAndRequests")]

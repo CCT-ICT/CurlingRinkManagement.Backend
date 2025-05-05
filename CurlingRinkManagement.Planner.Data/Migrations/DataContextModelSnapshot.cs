@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CurlingRinkManagement.Planner.Business.Migrations
+namespace CurlingRinkManagement.Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot

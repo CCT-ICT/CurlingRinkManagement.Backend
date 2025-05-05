@@ -1,6 +1,7 @@
 using CurlingRinkManagement.Core.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CurlingRinkManagement.Core.Controllers;
 
@@ -11,17 +12,15 @@ public class ClubController(IClubService _clubService) : ControllerBase
     [HttpGet]
     public IActionResult Get(Guid sheetId, [FromQuery] DateTime start, [FromQuery] DateTime end)
     {
-        var u = User;
-        /*try
+        var groups = User.Claims.Where(c => c.Type == "Group").Select(c => c.Value);
+        try
         {
-            var activities = _clubService.GetClubs();
-            var converted = activities.Select(_clubService.FromActivity);
-            return Ok(converted);
+            var clubs = _clubService.GetClubs([.. groups]);
+            return Ok(clubs);
         }
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
-        }*/
-        return Ok();
+        }
     }
 }

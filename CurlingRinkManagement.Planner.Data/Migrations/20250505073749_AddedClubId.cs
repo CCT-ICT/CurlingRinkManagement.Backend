@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CurlingRinkManagement.Planner.Business.Migrations
+namespace CurlingRinkManagement.Planner.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AddedClubId : Migration
