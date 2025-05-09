@@ -1,5 +1,4 @@
 ﻿using CurlingRinkManagement.Common.Data.Database;
-using Microsoft.EntityFrameworkCore;
 
 namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
 public class Contact : IClubEntity

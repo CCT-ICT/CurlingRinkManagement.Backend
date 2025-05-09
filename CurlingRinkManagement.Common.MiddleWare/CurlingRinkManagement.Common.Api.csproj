@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CurlingRinkManagement.Common.Data\CurlingRinkManagement.Common.Data.csproj" />
+    <ProjectReference Include="..\CurlingRinkManagement.Core.Data\CurlingRinkManagement.Core.Data.csproj" />
   </ItemGroup>
 
 </Project>

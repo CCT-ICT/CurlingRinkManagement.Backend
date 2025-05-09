@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Http;
 
 
 namespace CurlingRinkManagement.Common.Api.Extensions;
@@ -20,7 +20,9 @@ public static class BuilderExtensions
             opt.UseNpgsql(configuration.GetConnectionString("Database")));
 
         services.AddScoped<DbContext, DataContext>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped(typeof(IClubRepository<>), typeof(ClubRepository<>));
+        services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         return services;
     }
 
@@ -50,7 +52,7 @@ public static class BuilderExtensions
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = oidcConfig["Issuer"],
-                IssuerSigningKey = new X509SecurityKey(X509Certificate2.CreateFromPem(oidcConfig["ClientSecret"]!))
+                IssuerSigningKey = new X509SecurityKey(X509Certificate2.CreateFromPem(oidcConfig["ClientSecret"]!)),
             };
             options.Events = new JwtBearerEvents
             {
