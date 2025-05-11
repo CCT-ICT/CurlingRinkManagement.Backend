@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddGenericAuthentication(builder.Configuration);
 builder.Services.AddDatabase<PlannerDataContext>(builder.Configuration);
+builder.Services.AddCoreDatabase(builder.Configuration);
 
 builder.Services.AddScoped<IActivityService, ActivityService>();
 builder.Services.AddScoped<ISheetService, SheetService>();
@@ -34,7 +35,6 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-app.UseMiddleware<ClubValidationMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -50,5 +50,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//Do this after authorization
+app.UseMiddleware<ClubValidationMiddleware>();
 
 app.Run();

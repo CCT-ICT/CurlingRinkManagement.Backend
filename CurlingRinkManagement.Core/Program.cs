@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddBaseDatabase<CoreDataContext>(builder.Configuration);
+builder.Services.AddCoreDatabase(builder.Configuration);
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddGenericAuthentication(builder.Configuration);
 

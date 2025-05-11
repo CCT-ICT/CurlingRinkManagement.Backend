@@ -17,15 +17,16 @@ public class ClubValidationMiddleware(RequestDelegate _next, ILogger<ClubValidat
         }
 
 
-        var groups = httpContext.User.Claims.Where(c => c.Type == "groups").Select(c => c.Value);
+        var groups = httpContext.User.Claims.Where(c => c.Type == "groups").Select(c => c.Value).ToList();
         if (!httpContext.Request.Headers.TryGetValue("X-Club-Id", out var clubId))
         {
             _logger.LogTrace("No club id header defined");
             httpContext.Response.StatusCode = 400;
             return;
         }
+        var id = Guid.Parse(clubId.First()!);
 
-        if (_clubRepository.GetAll().Any(c => c.Id == clubId && groups.Contains(c.ClubGroup)))
+        if (_clubRepository.GetAll().Any(c => c.Id == id && groups.Contains(c.ClubGroup)))
         {
             
             await _next(httpContext);

@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CurlingRinkManagement.Common.Data.Database;
 
-namespace CurlingRinkManagement.Common.Data.Database;
+namespace CurlingRinkManagement.Core.Data.Database;
 
 /**
  * Repository for system wide entities
  */
-public class BaseRepository<TEntity>(DbContext dataContext): IBaseRepository<TEntity> where TEntity : class, IDatabaseEntity
+public class BaseRepository<TEntity>(CoreDataContext dataContext): IBaseRepository<TEntity> where TEntity : class, IDatabaseEntity
 {
-    private readonly DbContext _dataContext = dataContext;
+    private readonly CoreDataContext _dataContext = dataContext;
 
     public TEntity Create(TEntity entity)
     {

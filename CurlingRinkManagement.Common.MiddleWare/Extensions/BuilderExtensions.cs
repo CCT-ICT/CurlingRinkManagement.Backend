@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Http;
+using CurlingRinkManagement.Core.Data.Database;
 
 
 namespace CurlingRinkManagement.Common.Api.Extensions;
@@ -26,12 +27,11 @@ public static class BuilderExtensions
         return services;
     }
 
-    public static IServiceCollection AddBaseDatabase<DataContext>(this IServiceCollection services, IConfiguration configuration) where DataContext : DbContext
+    public static IServiceCollection AddCoreDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContextPool<DataContext>(opt =>
+        services.AddDbContextPool<CoreDataContext>(opt =>
             opt.UseNpgsql(configuration.GetConnectionString("Database")));
 
-        services.AddScoped<DbContext, DataContext>();
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         return services;
 
@@ -44,15 +44,15 @@ public static class BuilderExtensions
         {
             var oidcConfig = configuration.GetSection("OpenIDConnectSettings");
             options.IncludeErrorDetails = true;
+            options.Authority = oidcConfig["Issuer"];
+            options.RequireHttpsMetadata = bool.Parse(oidcConfig["requireHttps"]!);
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 //define which claim requires to check
                 ValidateIssuer = true,
                 ValidateAudience = false,
                 ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
                 ValidIssuer = oidcConfig["Issuer"],
-                IssuerSigningKey = new X509SecurityKey(X509Certificate2.CreateFromPem(oidcConfig["ClientSecret"]!)),
             };
             options.Events = new JwtBearerEvents
             {
