@@ -1,7 +1,7 @@
-﻿using CurlingRinkManagement.Planner.Domain.DatabaseModels;
+﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CurlingRinkManagement.Planner.Domain.Models;
+namespace CurlingRinkManagement.Planner.Data.Models;
 
 public class DateTimeRangeModel
 {

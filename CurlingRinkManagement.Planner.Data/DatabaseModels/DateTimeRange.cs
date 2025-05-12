@@ -1,9 +1,10 @@
-﻿using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Common.Data.Database;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CurlingRinkManagement.Planner.Domain.DatabaseModels;
-public class DateTimeRange : IDatabaseEntity
+namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
+public class DateTimeRange : IClubEntity
 {
+    public Guid ClubId { get; set; } = Guid.Empty;
     public Guid Id { get; set; } = Guid.NewGuid();
     public DateTime Start { get; set; }
     public DateTime End { get; set; }

@@ -1,5 +1,5 @@
-using CurlingRinkManagement.Planner.Domain.Interfaces;
-using CurlingRinkManagement.Planner.Domain.Models;
+using CurlingRinkManagement.Planner.Data.Interfaces;
+using CurlingRinkManagement.Planner.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CurlingRinkManagement.Planner.Controllers;

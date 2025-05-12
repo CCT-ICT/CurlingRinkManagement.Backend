@@ -1,19 +1,18 @@
-﻿using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Common.Data.Database;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CurlingRinkManagement.Planner.Domain.DatabaseModels
+namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
+public class SheetActivity : IClubEntity
 {
-    public class SheetActivity : IDatabaseEntity
-    {
-        public Guid Id { get; set; }
+    public Guid ClubId { get; set; } = Guid.Empty;
+    public Guid Id { get; set; }
 
-        //references
-        [ForeignKey("Sheet")]
-        public Guid SheetId { get; set; }
-        public Sheet? Sheet { get; set; }
+    //references
+    [ForeignKey("Sheet")]
+    public Guid SheetId { get; set; }
+    public Sheet? Sheet { get; set; }
 
-        [ForeignKey("Activity")]
-        public Guid ActivityId { get; set; }
-        public Activity? Activity { get; set; }
-    }
+    [ForeignKey("Activity")]
+    public Guid ActivityId { get; set; }
+    public Activity? Activity { get; set; }
 }

@@ -1,6 +1,6 @@
-﻿using CurlingRinkManagement.Planner.Domain.DatabaseModels;
+﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
 
-namespace CurlingRinkManagement.Planner.Domain.Models;
+namespace CurlingRinkManagement.Planner.Data.Models;
 public class ActivityModel
 {
     public Guid Id { get; set; } = Guid.NewGuid();
@@ -8,6 +8,7 @@ public class ActivityModel
     public List<DateTimeRangeModel> PlannedDates { get; set; } = [];
     public List<Guid> SheetIds { get; set; } = [];
     public Guid ActivityTypeId { get; set; }
+    public Guid? CustomerRequestId { get; set; }
 
     public static ActivityModel FromActivity(Activity activity)
     {
@@ -18,6 +19,7 @@ public class ActivityModel
             PlannedDates = activity.PlannedDates.Select(DateTimeRangeModel.FromDateTimeRange).ToList(),
             SheetIds = activity.Sheets.Select(s => s.SheetId).ToList(),
             ActivityTypeId = activity.ActivityTypeId,
+            CustomerRequestId = activity.CustomerRequestId
         };
     }
 
@@ -30,6 +32,7 @@ public class ActivityModel
             PlannedDates = PlannedDates.Select(d => d.ToDateTimeRange()).ToList(),
             Sheets = SheetIds.Select(s => new SheetActivity() { Id = Guid.NewGuid(), SheetId = s, ActivityId = Id}).ToList(),
             ActivityTypeId = ActivityTypeId,
+            CustomerRequestId = CustomerRequestId
         };
     }
 

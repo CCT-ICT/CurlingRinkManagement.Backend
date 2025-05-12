@@ -1,7 +1,8 @@
-using CurlingRinkManagement.Planner.Business.Database;
+using CurlingRinkManagement.Common.Api.Extensions;
+using CurlingRinkManagement.Common.Api.Middleware;
 using CurlingRinkManagement.Planner.Business.Services;
-using CurlingRinkManagement.Planner.Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using CurlingRinkManagement.Planner.Data.Database;
+using CurlingRinkManagement.Planner.Data.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,14 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContextPool<DataContext>(opt =>
-    opt.UseNpgsql(
-        builder.Configuration.GetConnectionString("Database")));
+builder.Services.AddGenericAuthentication(builder.Configuration);
+builder.Services.AddDatabase<PlannerDataContext>(builder.Configuration);
+builder.Services.AddCoreDatabase(builder.Configuration);
 
 builder.Services.AddScoped<IActivityService, ActivityService>();
 builder.Services.AddScoped<ISheetService, SheetService>();
 builder.Services.AddScoped<IActivityTypeService, ActivityTypeService>();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 
 //Make Cors stricter at some point
 builder.Services.AddCors(options =>
@@ -41,6 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseCors();
 
 app.UseHttpsRedirection();
@@ -48,5 +50,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//Do this after authorization
+app.UseMiddleware<ClubValidationMiddleware>();
 
 app.Run();

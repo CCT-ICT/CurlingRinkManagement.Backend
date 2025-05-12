@@ -1,11 +1,12 @@
-﻿using CurlingRinkManagement.Planner.Domain.DatabaseModels;
-using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Common.Data.Database;
+using CurlingRinkManagement.Planner.Data.DatabaseModels;
+using CurlingRinkManagement.Planner.Data.Interfaces;
 
 namespace CurlingRinkManagement.Planner.Business.Services;
 
-public class SheetService(IRepository<Sheet> sheetRepository) : ISheetService 
+public class SheetService(IClubRepository<Sheet> sheetRepository) : ISheetService 
 {
-    private readonly IRepository<Sheet> _sheetRepository = sheetRepository;
+    private readonly IClubRepository<Sheet> _sheetRepository = sheetRepository;
 
     public List<Sheet> GetAll()
     {

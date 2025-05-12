@@ -1,11 +1,12 @@
-﻿using CurlingRinkManagement.Planner.Domain.DatabaseModels;
-using CurlingRinkManagement.Planner.Domain.Interfaces;
+﻿using CurlingRinkManagement.Common.Data.Database;
+using CurlingRinkManagement.Planner.Data.DatabaseModels;
+using CurlingRinkManagement.Planner.Data.Interfaces;
 
 namespace CurlingRinkManagement.Planner.Business.Services;
 
-public class ActivityTypeService(IRepository<ActivityType> activityTypeRepository) : IActivityTypeService
+public class ActivityTypeService(IClubRepository<ActivityType> activityTypeRepository) : IActivityTypeService
 {
-    private readonly IRepository<ActivityType> _activityTypeRepository = activityTypeRepository;
+    private readonly IClubRepository<ActivityType> _activityTypeRepository = activityTypeRepository;
 
     public ActivityType Create(ActivityType activityType)
     {

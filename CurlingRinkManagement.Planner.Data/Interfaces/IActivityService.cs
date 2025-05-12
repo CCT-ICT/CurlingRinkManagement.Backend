@@ -1,7 +1,8 @@
 ﻿
-using CurlingRinkManagement.Planner.Domain.DatabaseModels;
 
-namespace CurlingRinkManagement.Planner.Domain.Interfaces;
+using CurlingRinkManagement.Planner.Data.DatabaseModels;
+
+namespace CurlingRinkManagement.Planner.Data.Interfaces;
 
 public interface IActivityService
 {
