@@ -20,6 +20,7 @@ public class PlannerDataContext : DbContext
         modelBuilder.Entity<Activity>().OwnsMany(a => a.Sheets);
 
         modelBuilder.Entity<Contact>().HasIndex(c => new { c.ClubId, c.Email }).IsUnique();
+        modelBuilder.Entity<Contact>().HasMany(c => c.Tags).WithMany();
     }
 
     public DbSet<Activity> Activities { get; set; }

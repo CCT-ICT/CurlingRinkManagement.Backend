@@ -8,7 +8,9 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\CurlingRinkManagement.Common.Business\CurlingRinkManagement.Common.Business.csproj" />
     <ProjectReference Include="..\CurlingRinkManagement.Common.Data\CurlingRinkManagement.Common.Data.csproj" />
+    <ProjectReference Include="..\CurlingRinkManagement.Core.Data\CurlingRinkManagement.Core.Data.csproj" />
     <ProjectReference Include="..\CurlingRinkManagement.Planner.Data\CurlingRinkManagement.Planner.Data.csproj" />
   </ItemGroup>
 

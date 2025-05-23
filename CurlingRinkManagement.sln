@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{55CF699A-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Planner", "Planner", "{3EEACAB1-1787-4404-BE5F-254D85554884}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlingRinkManagement.Common.Business", "Common\CurlingRinkManagement.Common.Business\CurlingRinkManagement.Common.Business.csproj", "{13A3A832-2DCD-497B-A6A6-4F93CD0A6295}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{B4B87E21-2383-4F71-8C06-D0240EECBDEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4B87E21-2383-4F71-8C06-D0240EECBDEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4B87E21-2383-4F71-8C06-D0240EECBDEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A3A832-2DCD-497B-A6A6-4F93CD0A6295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A3A832-2DCD-497B-A6A6-4F93CD0A6295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A3A832-2DCD-497B-A6A6-4F93CD0A6295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A3A832-2DCD-497B-A6A6-4F93CD0A6295}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{0F227032-9A53-4380-B8DB-5FF9AD622FF5} = {55CF699A-9D05-4661-9810-51E519E03441}
 		{DF5374F4-BC25-4A01-8F0B-7D8AC5944E51} = {55CF699A-9D05-4661-9810-51E519E03441}
 		{B4B87E21-2383-4F71-8C06-D0240EECBDEC} = {55CF699A-9D05-4661-9810-51E519E03441}
+		{13A3A832-2DCD-497B-A6A6-4F93CD0A6295} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E359BC0-1153-4680-B77D-D1A9EE715FC0}
