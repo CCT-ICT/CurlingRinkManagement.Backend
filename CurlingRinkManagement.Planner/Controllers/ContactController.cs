@@ -4,9 +4,10 @@ using CurlingRinkManagement.Planner.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CurlingRinkManagement.Planner.Controllers;
-
 [ApiController]
 [Route("Api/[controller]")]
-public class SheetController(ISheetService sheetService) : BaseController<Sheet>(sheetService)
+public class ContactController(IContactService _contactService) : BaseController<Contact>(_contactService)
 {
+
 }
+

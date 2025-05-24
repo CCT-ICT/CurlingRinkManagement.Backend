@@ -16,5 +16,7 @@ public class Contact : IClubEntity
     public DateTime DateAdded { get; set; } = DateTime.Now;
 
     public List<Tag>? Tags { get; set; }
+
+
 }
 

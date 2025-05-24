@@ -17,9 +17,10 @@ builder.Services.AddGenericAuthentication(builder.Configuration);
 builder.Services.AddDatabase<PlannerDataContext>(builder.Configuration);
 builder.Services.AddCoreDatabase(builder.Configuration);
 
-builder.Services.AddScoped<IActivityService, ActivityService>();
-builder.Services.AddScoped<ISheetService, SheetService>();
-builder.Services.AddScoped<IActivityTypeService, ActivityTypeService>();
+builder.Services.AddScoped<IActivityService, ActivityService>()
+    .AddScoped<ISheetService, SheetService>()
+    .AddScoped<IActivityTypeService, ActivityTypeService>()
+    .AddScoped<IContactService, ContactService>();
 
 
 //Make Cors stricter at some point
@@ -33,7 +34,6 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod();
         });
 });
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

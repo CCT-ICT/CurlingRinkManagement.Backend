@@ -1,10 +1,8 @@
-﻿
-using CurlingRinkManagement.Common.Data.Interfaces;
+﻿using CurlingRinkManagement.Common.Data.Interfaces;
 using CurlingRinkManagement.Planner.Data.DatabaseModels;
 
 namespace CurlingRinkManagement.Planner.Data.Interfaces;
-
-public interface ISheetService : IBaseService<Sheet>
+public interface IContactService : IBaseService<Contact>
 {
 }
 
