@@ -12,7 +12,7 @@ public class CustomerRequest : IClubEntity
     public int AmountOfPeople { get; set; } = 0;
     public string AdditionalInfo { get; set; } = string.Empty;
     public string? CustomPriceReason { get; set; } = string.Empty;
-    public float CustomPrice { get; set; } = 0f;
+    public float? CustomPrice { get; set; } = 0f;
     public CustomerRequestState CustomerRequestState { get; set; }
 
 

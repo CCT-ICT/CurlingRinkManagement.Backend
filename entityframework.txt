@@ -1,0 +1,2 @@
+cd api
+dotnet ef migrations add {name} --project=../{Data Project} --context={contextName}

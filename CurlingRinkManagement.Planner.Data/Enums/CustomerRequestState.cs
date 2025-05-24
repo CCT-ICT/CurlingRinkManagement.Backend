@@ -5,6 +5,8 @@ public enum CustomerRequestState
     DateInOption,
     DateConfirmed,
     InvoiceSent,
-    PaymentReceived
+    PaymentReceived,
+    Completed,
+    Cancled
 }
 

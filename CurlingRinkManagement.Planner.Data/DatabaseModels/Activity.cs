@@ -19,7 +19,7 @@ public class Activity : IClubEntity
 
     [ForeignKey("CustomerRequest")]
     public Guid? CustomerRequestId { get; set; }
-    public CustomerRequest? CustomerRequest { get; set; } = null;
+    public List<CustomerRequest> CustomerRequests { get; set; } = [];
 
 }
 
