@@ -20,7 +20,8 @@ builder.Services.AddCoreDatabase(builder.Configuration);
 builder.Services.AddScoped<IActivityService, ActivityService>()
     .AddScoped<ISheetService, SheetService>()
     .AddScoped<IActivityTypeService, ActivityTypeService>()
-    .AddScoped<IContactService, ContactService>();
+    .AddScoped<IContactService, ContactService>()
+    .AddScoped<ICustomerRequestService, CustomerRequestService>();
 
 
 //Make Cors stricter at some point

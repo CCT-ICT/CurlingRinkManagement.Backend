@@ -2,6 +2,7 @@
 public enum GenericFilters
 {
     Generic,
-    Name
+    Name,
+    CustomerRequestState
 }
 

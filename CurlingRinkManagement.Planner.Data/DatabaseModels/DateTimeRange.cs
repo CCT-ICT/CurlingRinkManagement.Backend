@@ -11,9 +11,9 @@ public class DateTimeRange : IClubEntity
     public int MinutesBlockedBefore { get; set; }
     public int MinutesBlockedAfter { get; set; }
 
-    [ForeignKey("Activity")]
-    public Guid ActivityId { get; set; }
+    [ForeignKey("SheetActivity")]
+    public Guid SheetActivityId { get; set; }
 
-    public Activity? Activity { get; set; }
+    public SheetActivity? Activity { get; set; }
 }
 

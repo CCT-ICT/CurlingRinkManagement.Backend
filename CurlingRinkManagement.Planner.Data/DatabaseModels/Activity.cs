@@ -10,8 +10,7 @@ public class Activity : IClubEntity
     public string Title { get; set; } = string.Empty;
 
     //References
-    public List<DateTimeRange> PlannedDates { get; set; } = [];
-    public List<SheetActivity> Sheets { get; set; } = [];
+    public List<SheetActivity> SheetActivities { get; set; } = [];
 
     [ForeignKey("ActivityType")]
     public Guid ActivityTypeId { get; set; }

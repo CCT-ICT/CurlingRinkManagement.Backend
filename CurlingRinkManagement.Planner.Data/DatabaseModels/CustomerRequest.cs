@@ -20,6 +20,8 @@ public class CustomerRequest : IClubEntity
     public Guid ContactId { get; set; }
     public Contact? Contact { get; set; }
 
+    [ForeignKey("Activity")]
+    public Guid? ActivityId { get; set; }
     public Activity? Activity { get; set; }
 
 }

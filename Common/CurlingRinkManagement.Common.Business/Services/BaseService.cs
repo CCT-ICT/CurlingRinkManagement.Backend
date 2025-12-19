@@ -2,8 +2,9 @@
 using CurlingRinkManagement.Common.Data.Interfaces;
 
 namespace CurlingRinkManagement.Common.Business.Services;
-public abstract class BaseService<Entity>(IClubRepository<Entity> _entityRepository) : IBaseService<Entity> where Entity : class, IClubEntity
+public abstract class BaseService<Entity>(IClubRepository<Entity> entityRepository) : IBaseService<Entity> where Entity : class, IClubEntity
 {
+    protected readonly IClubRepository<Entity> _entityRepository = entityRepository;
     public virtual Entity Create(Entity entity)
     {
         return _entityRepository.Create(entity);
@@ -26,6 +27,11 @@ public abstract class BaseService<Entity>(IClubRepository<Entity> _entityReposit
         if (page != null && amount != null && page > 0 && amount > 0 && amount <= 300)
         {
             query = query.Skip((page.Value - 1) * amount.Value).Take(amount.Value);
+        }
+
+        if (amount != null && amount > 0 && amount <= 300)
+        {
+            query = query.Take(amount.Value);
         }
         else
         {

@@ -20,7 +20,7 @@ public class ContactService : BaseService<Contact>, IContactService
         for (int i = 0; i < filters.Length; i++)
         {
             var filter = filters[i];
-            var filterValue = filterValues[i].ToLower().Replace(" ", "");
+            var filterValue = filterValues[i]?.ToLower().Replace(" ", "") ?? "";
             if (Enum.TryParse<GenericFilters>(filter, out var parsedFilter))
                 switch (parsedFilter)
                 {
