@@ -5,8 +5,7 @@ public class ActivityModel
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Title { get; set; } = string.Empty;
-    public List<DateTimeRangeModel> PlannedDates { get; set; } = [];
-    public List<Guid> SheetIds { get; set; } = [];
+    public List<SheetActivityModel> SheetActivities { get; set; } = [];
     public Guid ActivityTypeId { get; set; }
     public Guid? CustomerRequestId { get; set; }
 
@@ -16,8 +15,7 @@ public class ActivityModel
         {
             Id = activity.Id,
             Title = activity.Title,
-            PlannedDates = activity.PlannedDates.Select(DateTimeRangeModel.FromDateTimeRange).ToList(),
-            SheetIds = activity.Sheets.Select(s => s.SheetId).ToList(),
+            SheetActivities = activity.SheetActivities.Select(SheetActivityModel.FromSheetActivity).ToList(),
             ActivityTypeId = activity.ActivityTypeId,
             CustomerRequestId = activity.CustomerRequestId
         };
@@ -29,8 +27,7 @@ public class ActivityModel
         {
             Id = Id,
             Title = Title,
-            PlannedDates = PlannedDates.Select(d => d.ToDateTimeRange()).ToList(),
-            Sheets = SheetIds.Select(s => new SheetActivity() { Id = Guid.NewGuid(), SheetId = s, ActivityId = Id}).ToList(),
+            SheetActivities = SheetActivities.Select(s => s.ToSheetActivity()).ToList(),
             ActivityTypeId = ActivityTypeId,
             CustomerRequestId = CustomerRequestId
         };

@@ -11,8 +11,7 @@ public class DateTimeRangeModel
     public int MinutesBlockedBefore { get; set; }
     public int MinutesBlockedAfter { get; set; }
 
-    [ForeignKey("Activity")]
-    public Guid ActivityId { get; set; }
+    public Guid SheetActivityId { get; set; }
 
     public DateTimeRange ToDateTimeRange()
     {
@@ -23,7 +22,7 @@ public class DateTimeRangeModel
             End = End,
             MinutesBlockedBefore = MinutesBlockedBefore,
             MinutesBlockedAfter = MinutesBlockedAfter,
-            ActivityId = ActivityId,
+            SheetActivityId = SheetActivityId,
         };
     }
 
@@ -36,7 +35,7 @@ public class DateTimeRangeModel
             End = dateTimeRange.End,
             MinutesBlockedBefore = dateTimeRange.MinutesBlockedBefore,
             MinutesBlockedAfter = dateTimeRange.MinutesBlockedAfter,
-            ActivityId = dateTimeRange.Activity != null? dateTimeRange.Activity.Id : dateTimeRange.ActivityId,
+            SheetActivityId = dateTimeRange.Activity != null? dateTimeRange.Activity.Id : dateTimeRange.SheetActivityId,
         };
     }
 }

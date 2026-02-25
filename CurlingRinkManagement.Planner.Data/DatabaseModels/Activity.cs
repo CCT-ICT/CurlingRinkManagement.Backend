@@ -10,8 +10,7 @@ public class Activity : IClubEntity
     public string Title { get; set; } = string.Empty;
 
     //References
-    public List<DateTimeRange> PlannedDates { get; set; } = [];
-    public List<SheetActivity> Sheets { get; set; } = [];
+    public List<SheetActivity> SheetActivities { get; set; } = [];
 
     [ForeignKey("ActivityType")]
     public Guid ActivityTypeId { get; set; }
@@ -19,7 +18,7 @@ public class Activity : IClubEntity
 
     [ForeignKey("CustomerRequest")]
     public Guid? CustomerRequestId { get; set; }
-    public CustomerRequest? CustomerRequest { get; set; } = null;
+    public List<CustomerRequest> CustomerRequests { get; set; } = [];
 
 }
 

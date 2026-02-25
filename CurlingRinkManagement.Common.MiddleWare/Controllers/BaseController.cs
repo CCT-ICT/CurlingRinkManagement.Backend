@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using System.Data.Common;
 
 namespace CurlingRinkManagement.Common.Api.Controllers;
 public class BaseController<Entity>(IBaseService<Entity> _baseService) : Controller where Entity : class, IClubEntity
@@ -89,7 +88,7 @@ public class BaseController<Entity>(IBaseService<Entity> _baseService) : Control
     }
 
     [HttpGet]
-    [Route("{sheetId?}")]
+    [Route("{entityId?}")]
     public IActionResult GetById(Guid entityId)
     {
         try

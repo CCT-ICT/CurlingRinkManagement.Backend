@@ -1,6 +1,5 @@
 using CurlingRinkManagement.Common.Api.Extensions;
 using CurlingRinkManagement.Core.Business.Services;
-using CurlingRinkManagement.Core.Data.Database;
 using CurlingRinkManagement.Core.Data.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);

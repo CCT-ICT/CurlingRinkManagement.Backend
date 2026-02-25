@@ -3,6 +3,7 @@ using System;
 using CurlingRinkManagement.Planner.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CurlingRinkManagement.Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250524135704_MadeActivityRequestManyToOne")]
+    partial class MadeActivityRequestManyToOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,7 +160,7 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uuid");
 
-                    b.Property<float?>("CustomPrice")
+                    b.Property<float>("CustomPrice")
                         .HasColumnType("real");
 
                     b.Property<string>("CustomPriceReason")
@@ -246,7 +249,41 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.SheetActivity", "SheetActivities", b1 =>
+                    b.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.DateTimeRange", "PlannedDates", b1 =>
+                        {
+                            b1.Property<Guid>("ActivityId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("ClubId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("End")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<int>("MinutesBlockedAfter")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("MinutesBlockedBefore")
+                                .HasColumnType("integer");
+
+                            b1.Property<DateTime>("Start")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.HasKey("ActivityId", "Id");
+
+                            b1.ToTable("DateTimeRanges");
+
+                            b1.WithOwner("Activity")
+                                .HasForeignKey("ActivityId");
+
+                            b1.Navigation("Activity");
+                        });
+
+                    b.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.SheetActivity", "Sheets", b1 =>
                         {
                             b1.Property<Guid>("ActivityId")
                                 .HasColumnType("uuid");
@@ -276,53 +313,16 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
                                 .OnDelete(DeleteBehavior.Cascade)
                                 .IsRequired();
 
-                            b1.OwnsOne("CurlingRinkManagement.Planner.Data.DatabaseModels.DateTimeRange", "ActivityTime", b2 =>
-                                {
-                                    b2.Property<Guid>("SheetActivityActivityId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("SheetActivityId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("ClubId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<DateTime>("End")
-                                        .HasColumnType("timestamp with time zone");
-
-                                    b2.Property<Guid>("Id")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<int>("MinutesBlockedAfter")
-                                        .HasColumnType("integer");
-
-                                    b2.Property<int>("MinutesBlockedBefore")
-                                        .HasColumnType("integer");
-
-                                    b2.Property<DateTime>("Start")
-                                        .HasColumnType("timestamp with time zone");
-
-                                    b2.HasKey("SheetActivityActivityId", "SheetActivityId");
-
-                                    b2.ToTable("DateTimeRanges");
-
-                                    b2.WithOwner("Activity")
-                                        .HasForeignKey("SheetActivityActivityId", "SheetActivityId");
-
-                                    b2.Navigation("Activity");
-                                });
-
                             b1.Navigation("Activity");
-
-                            b1.Navigation("ActivityTime")
-                                .IsRequired();
 
                             b1.Navigation("Sheet");
                         });
 
                     b.Navigation("ActivityType");
 
-                    b.Navigation("SheetActivities");
+                    b.Navigation("PlannedDates");
+
+                    b.Navigation("Sheets");
                 });
 
             modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.CustomerRequest", b =>

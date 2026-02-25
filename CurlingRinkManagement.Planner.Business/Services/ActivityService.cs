@@ -9,6 +9,14 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
 {
     public Activity Create(Activity activity)
     {
+        var clubId = _activityRepository.GetClubId();
+
+        foreach (var sheet in activity.SheetActivities)
+        {
+            sheet.ClubId = clubId;
+            sheet.ActivityTime.ClubId = clubId;
+        }
+
         return _activityRepository.Create(activity);
     }
 
@@ -20,7 +28,7 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
 
     public Activity GetById(Guid id)
     {
-        var activity = _activityRepository.GetAll().Include(a => a.PlannedDates).Include(a => a.Sheets).FirstOrDefault(x => x.Id == id);
+        var activity = _activityRepository.GetAll().Include(a => a.SheetActivities).ThenInclude(s => s.ActivityTime).Include(a => a.SheetActivities).FirstOrDefault(x => x.Id == id);
 
         if (activity == null)
             throw new KeyNotFoundException($"Activity with id {id} does not exist");
@@ -29,10 +37,10 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
 
     public List<Activity> GetAllOnSheet(Guid sheetId, DateTime start, DateTime end)
     {
-        var activitiesQuery = _activityRepository.GetAll().Include(a => a.PlannedDates).Include(a => a.ActivityType).Include(a => a.Sheets)
-            .Where(a => a.Sheets.Any(s => s.SheetId == sheetId))
-            .Where(a => a.PlannedDates.Any(d => (d.Start.AddMinutes(-d.MinutesBlockedBefore) >= start && d.Start.AddMinutes(-d.MinutesBlockedBefore) <= end) ||
-                                                (d.End.AddMinutes(d.MinutesBlockedAfter) >= start && d.End.AddMinutes(d.MinutesBlockedAfter) <= end)));
+        var activitiesQuery = _activityRepository.GetAll().Include(a => a.SheetActivities).ThenInclude(s => s.ActivityTime).Include(a => a.ActivityType).Include(a => a.SheetActivities)
+            .Where(a => a.SheetActivities.Any(s => s.SheetId == sheetId))
+            .Where(a => a.SheetActivities.Any(d => (d.ActivityTime.Start.AddMinutes(-d.ActivityTime.MinutesBlockedBefore) >= start && d.ActivityTime.Start.AddMinutes(-d.ActivityTime.MinutesBlockedBefore) <= end) ||
+                                                (d.ActivityTime.End.AddMinutes(d.ActivityTime.MinutesBlockedAfter) >= start && d.ActivityTime.End.AddMinutes(d.ActivityTime.MinutesBlockedAfter) <= end)));
 
         return activitiesQuery.ToList();
     }
@@ -42,19 +50,32 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
         var toUpdate = GetById(activity.Id);
 
         toUpdate.ActivityTypeId = activity.ActivityTypeId;
-        toUpdate.PlannedDates = activity.PlannedDates;
         toUpdate.Title = activity.Title;
+        toUpdate.CustomerRequestId = activity.CustomerRequestId;
         
-        var newSheets = activity.Sheets.Where(s => !toUpdate.Sheets.Any(s2 => s.SheetId == s2.SheetId)).ToList();
-        var removedsSheets = toUpdate.Sheets.Where(s => !activity.Sheets.Any(s2 => s.SheetId == s2.SheetId)).ToList();
+        var newSheets = activity.SheetActivities.Where(s => !toUpdate.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
+        var removedsSheets = toUpdate.SheetActivities.Where(s => !activity.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
+        var unchangedSheets = toUpdate.SheetActivities.Where(s => activity.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
 
         foreach (var sheet in removedsSheets)
         {
-            toUpdate.Sheets.Remove(sheet);
+            toUpdate.SheetActivities.Remove(sheet);
         }
         foreach (var sheet in newSheets)
         {
-            toUpdate.Sheets.Add(sheet);
+            toUpdate.SheetActivities.Add(sheet);
+        }
+        foreach (var sheet in unchangedSheets)
+        {
+            sheet.ActivityTime = activity.SheetActivities.First(s => s.SheetId == sheet.SheetId).ActivityTime;
+        }
+
+        var clubId = _activityRepository.GetClubId();
+
+        foreach (var sheet in toUpdate.SheetActivities)
+        {
+            sheet.ClubId = clubId;
+            sheet.ActivityTime.ClubId = clubId;
         }
 
         return _activityRepository.Update(toUpdate);

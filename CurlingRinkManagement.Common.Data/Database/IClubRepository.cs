@@ -1,4 +1,5 @@
-﻿namespace CurlingRinkManagement.Common.Data.Database;
+﻿
+namespace CurlingRinkManagement.Common.Data.Database;
 
 public interface IClubRepository<TEntity> where TEntity : class, IClubEntity
 {
@@ -6,5 +7,6 @@ public interface IClubRepository<TEntity> where TEntity : class, IClubEntity
     TEntity Create(TEntity entity);
     public void Delete(TEntity entity);
     public TEntity Update(TEntity entity);
+    Guid GetClubId();
 }
 

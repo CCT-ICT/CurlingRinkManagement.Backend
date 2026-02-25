@@ -16,8 +16,8 @@ public class PlannerDataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Activity>().OwnsMany(a => a.PlannedDates);
-        modelBuilder.Entity<Activity>().OwnsMany(a => a.Sheets);
+        modelBuilder.Entity<Activity>().OwnsMany(a => a.SheetActivities).OwnsOne(a => a.ActivityTime);
+        modelBuilder.Entity<Activity>().HasMany(a => a.CustomerRequests).WithOne(c => c.Activity);
 
         modelBuilder.Entity<Contact>().HasIndex(c => new { c.ClubId, c.Email }).IsUnique();
         modelBuilder.Entity<Contact>().HasMany(c => c.Tags).WithMany();

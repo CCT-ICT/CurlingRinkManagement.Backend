@@ -47,7 +47,7 @@ public class ClubRepository<TEntity>(DbContext _dataContext, IHttpContextAccesso
         return returned.Entity;
     }
 
-    private Guid GetClubId()
+    public Guid GetClubId()
     {
         if (_httpContext.HttpContext.Request.Headers.TryGetValue("X-Club-Id", out var clubId))
         {
