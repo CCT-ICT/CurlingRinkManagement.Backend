@@ -51,6 +51,7 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
 
         toUpdate.ActivityTypeId = activity.ActivityTypeId;
         toUpdate.Title = activity.Title;
+        toUpdate.CustomerRequestId = activity.CustomerRequestId;
         
         var newSheets = activity.SheetActivities.Where(s => !toUpdate.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
         var removedsSheets = toUpdate.SheetActivities.Where(s => !activity.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
@@ -66,7 +67,7 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
         }
         foreach (var sheet in unchangedSheets)
         {
-            sheet.ActivityTime = activity.SheetActivities.First(s => s.Id == sheet.Id).ActivityTime;
+            sheet.ActivityTime = activity.SheetActivities.First(s => s.SheetId == sheet.SheetId).ActivityTime;
         }
 
         var clubId = _activityRepository.GetClubId();
