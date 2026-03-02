@@ -3,6 +3,7 @@ using System;
 using CurlingRinkManagement.Planner.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CurlingRinkManagement.Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20260302153821_AddedInstructorLink")]
+    partial class AddedInstructorLink
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -321,7 +324,7 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
                                     b2.Navigation("Activity");
                                 });
 
-                            b1.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.LinkedInstructor", "LinkedInstructors", b2 =>
+                            b1.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.LinkedInstrutor", "LinkedInstrutors", b2 =>
                                 {
                                     b2.Property<Guid>("SheetActivityActivityId")
                                         .HasColumnType("uuid");
@@ -339,7 +342,7 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
 
                                     b2.HasKey("SheetActivityActivityId", "SheetActivityId", "Id");
 
-                                    b2.ToTable("LinkedInstructor");
+                                    b2.ToTable("LinkedInstrutor");
 
                                     b2.WithOwner("Activity")
                                         .HasForeignKey("SheetActivityActivityId", "SheetActivityId");
@@ -352,7 +355,7 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
                             b1.Navigation("ActivityTime")
                                 .IsRequired();
 
-                            b1.Navigation("LinkedInstructors");
+                            b1.Navigation("LinkedInstrutors");
 
                             b1.Navigation("Sheet");
                         });

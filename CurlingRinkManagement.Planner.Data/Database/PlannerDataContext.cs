@@ -16,11 +16,15 @@ public class PlannerDataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Activity>().OwnsMany(a => a.SheetActivities).OwnsOne(a => a.ActivityTime);
+        modelBuilder.Entity<Activity>().OwnsMany(a => a.SheetActivities, sheetActivity => {
+            sheetActivity.OwnsOne(a => a.ActivityTime);
+            sheetActivity.OwnsMany(s => s.LinkedInstructors);
+        });
         modelBuilder.Entity<Activity>().HasMany(a => a.CustomerRequests).WithOne(c => c.Activity);
 
         modelBuilder.Entity<Contact>().HasIndex(c => new { c.ClubId, c.Email }).IsUnique();
         modelBuilder.Entity<Contact>().HasMany(c => c.Tags).WithMany();
+
     }
 
     public DbSet<Activity> Activities { get; set; }

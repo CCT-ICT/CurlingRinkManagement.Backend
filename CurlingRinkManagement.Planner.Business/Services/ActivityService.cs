@@ -45,6 +45,7 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
         return activitiesQuery.ToList();
     }
 
+    //TODO This is terrible. Find a better way
     public Activity Update(Activity activity)
     {
         var toUpdate = GetById(activity.Id);

@@ -3,6 +3,7 @@ using System;
 using CurlingRinkManagement.Planner.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CurlingRinkManagement.Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20260225195134_Instructor")]
+    partial class Instructor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -321,38 +324,10 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
                                     b2.Navigation("Activity");
                                 });
 
-                            b1.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.LinkedInstructor", "LinkedInstructors", b2 =>
-                                {
-                                    b2.Property<Guid>("SheetActivityActivityId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("SheetActivityId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("Id")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<string>("UserIdentity")
-                                        .IsRequired()
-                                        .HasColumnType("text");
-
-                                    b2.HasKey("SheetActivityActivityId", "SheetActivityId", "Id");
-
-                                    b2.ToTable("LinkedInstructor");
-
-                                    b2.WithOwner("Activity")
-                                        .HasForeignKey("SheetActivityActivityId", "SheetActivityId");
-
-                                    b2.Navigation("Activity");
-                                });
-
                             b1.Navigation("Activity");
 
                             b1.Navigation("ActivityTime")
                                 .IsRequired();
-
-                            b1.Navigation("LinkedInstructors");
 
                             b1.Navigation("Sheet");
                         });

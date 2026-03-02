@@ -1,5 +1,4 @@
 ﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CurlingRinkManagement.Planner.Data.Models;
 

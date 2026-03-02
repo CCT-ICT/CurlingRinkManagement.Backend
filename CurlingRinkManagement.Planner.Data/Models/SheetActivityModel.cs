@@ -1,17 +1,11 @@
 ﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CurlingRinkManagement.Planner.Data.Models;
 public class SheetActivityModel
 {
     public Guid Id { get; set; }
     public DateTimeRangeModel ActivityTime { get; set; } = new();
+    public List<LinkedInstructorModel> LinkedInstructors { get; set; } = new();
 
     public Guid SheetId { get; set; }
     public Guid ActivityId { get; set; }
@@ -23,7 +17,8 @@ public class SheetActivityModel
             Id = Id,
             ActivityId = ActivityId,
             SheetId = SheetId,
-            ActivityTime = ActivityTime.ToDateTimeRange()
+            ActivityTime = ActivityTime.ToDateTimeRange(),
+            LinkedInstructors = LinkedInstructors.Select(l => l.ToLinkedInstructor()).ToList()
         };
     }
 
@@ -34,7 +29,8 @@ public class SheetActivityModel
             Id = sheetActivity.Id,
             ActivityId = sheetActivity.ActivityId,
             SheetId = sheetActivity.SheetId,
-            ActivityTime = DateTimeRangeModel.FromDateTimeRange(sheetActivity.ActivityTime)
+            ActivityTime = DateTimeRangeModel.FromDateTimeRange(sheetActivity.ActivityTime),
+            LinkedInstructors = sheetActivity.LinkedInstructors.Select(LinkedInstructorModel.FromLinkedInstructor).ToList()
         };
     }
 }
