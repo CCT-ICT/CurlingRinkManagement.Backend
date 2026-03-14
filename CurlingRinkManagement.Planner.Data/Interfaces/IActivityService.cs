@@ -10,5 +10,6 @@ public interface IActivityService
     public void Delete(Guid id);
     public Activity Update(Activity activity);
     public List<Activity> GetAllOnSheet(Guid sheetId, DateTime start, DateTime end);
+    public Activity GetById(Guid id);
 }
 

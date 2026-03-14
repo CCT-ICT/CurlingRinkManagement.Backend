@@ -3,6 +3,7 @@ using System;
 using CurlingRinkManagement.Planner.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CurlingRinkManagement.Planner.Data.Migrations
 {
     [DbContext(typeof(PlannerDataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20260304132841_AddedClubIdToInstructor")]
+    partial class AddedClubIdToInstructor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,8 +318,10 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
 
                                     b2.ToTable("DateTimeRanges");
 
-                                    b2.WithOwner()
+                                    b2.WithOwner("Activity")
                                         .HasForeignKey("SheetActivityActivityId", "SheetActivityId");
+
+                                    b2.Navigation("Activity");
                                 });
 
                             b1.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.LinkedInstructor", "LinkedInstructors", b2 =>
@@ -342,8 +347,10 @@ namespace CurlingRinkManagement.Planner.Data.Migrations
 
                                     b2.ToTable("LinkedInstructor");
 
-                                    b2.WithOwner()
+                                    b2.WithOwner("Activity")
                                         .HasForeignKey("SheetActivityActivityId", "SheetActivityId");
+
+                                    b2.Navigation("Activity");
                                 });
 
                             b1.Navigation("Activity");

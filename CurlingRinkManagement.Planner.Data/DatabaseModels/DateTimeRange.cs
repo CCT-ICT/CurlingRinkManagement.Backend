@@ -11,9 +11,10 @@ public class DateTimeRange : IClubEntity
     public int MinutesBlockedBefore { get; set; }
     public int MinutesBlockedAfter { get; set; }
 
-    [ForeignKey("SheetActivity")]
-    public Guid SheetActivityId { get; set; }
-
-    public SheetActivity? Activity { get; set; }
+    public bool TimesEqual(DateTimeRange dateTimeRange)
+    {
+        return dateTimeRange.Start == Start && dateTimeRange.End == End && 
+            dateTimeRange.MinutesBlockedBefore == MinutesBlockedBefore && dateTimeRange.MinutesBlockedAfter == MinutesBlockedAfter;
+    }
 }
 

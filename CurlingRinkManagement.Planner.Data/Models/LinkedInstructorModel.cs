@@ -11,15 +11,13 @@ public class LinkedInstructorModel
 {
     public Guid Id { get; set; }
     public string UserIdentity { get; set; } = string.Empty;
-    public Guid SheetActivityId { get; set; }
 
     public LinkedInstructor ToLinkedInstructor()
     {
         return new LinkedInstructor()
         {
             Id = Id,
-            UserIdentity = UserIdentity,
-            SheetActivityId = SheetActivityId,
+            UserIdentity = UserIdentity
         };
     }
 
@@ -28,8 +26,7 @@ public class LinkedInstructorModel
         return new LinkedInstructorModel()
         {
             Id = linkedInstructor.Id,
-            UserIdentity = linkedInstructor.UserIdentity,
-            SheetActivityId = linkedInstructor.Activity != null ? linkedInstructor.Activity.Id : linkedInstructor.SheetActivityId,
+            UserIdentity = linkedInstructor.UserIdentity
         };
     }
 }

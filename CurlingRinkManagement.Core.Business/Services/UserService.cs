@@ -5,9 +5,9 @@ using CurlingRinkManagement.Core.Data.Models.Dto;
 namespace CurlingRinkManagement.Core.Business.Services;
 public class UserService(IUserdataService userdataService) : IUserService
 {
-    public async Task<UserData> GetUsers(string group)
+    public async Task<UserData> GetUsers(string group, string? search)
     {
-        var users = await userdataService.GetUser(group);
+        var users = await userdataService.GetUsers(group, search);
         var userData = new UserData()
         {
             Next = users.Pagination.Next,

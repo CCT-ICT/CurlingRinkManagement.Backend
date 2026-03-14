@@ -2,10 +2,11 @@
 using CurlingRinkManagement.Planner.Data.DatabaseModels;
 using CurlingRinkManagement.Planner.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace CurlingRinkManagement.Planner.Business.Services;
 
-public class ActivityService(IClubRepository<Activity> _activityRepository) : IActivityService
+public class ActivityService(IClubRepository<Activity> _activityRepository, IClubRepository<SheetActivity> _sheetActivityRepository) : IActivityService
 {
     public Activity Create(Activity activity)
     {
@@ -28,7 +29,7 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
 
     public Activity GetById(Guid id)
     {
-        var activity = _activityRepository.GetAll().Include(a => a.SheetActivities).ThenInclude(s => s.ActivityTime).Include(a => a.SheetActivities).FirstOrDefault(x => x.Id == id);
+        var activity = _activityRepository.GetAll().Include(a => a.SheetActivities).ThenInclude(s => s.ActivityTime).Include(a => a.SheetActivities).ThenInclude(s => s.LinkedInstructors).FirstOrDefault(x => x.Id == id);
 
         if (activity == null)
             throw new KeyNotFoundException($"Activity with id {id} does not exist");
@@ -53,32 +54,41 @@ public class ActivityService(IClubRepository<Activity> _activityRepository) : IA
         toUpdate.ActivityTypeId = activity.ActivityTypeId;
         toUpdate.Title = activity.Title;
         toUpdate.CustomerRequestId = activity.CustomerRequestId;
-        
-        var newSheets = activity.SheetActivities.Where(s => !toUpdate.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
-        var removedsSheets = toUpdate.SheetActivities.Where(s => !activity.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
-        var unchangedSheets = toUpdate.SheetActivities.Where(s => activity.SheetActivities.Any(s2 => s.SheetId == s2.SheetId)).ToList();
 
-        foreach (var sheet in removedsSheets)
-        {
-            toUpdate.SheetActivities.Remove(sheet);
-        }
-        foreach (var sheet in newSheets)
-        {
-            toUpdate.SheetActivities.Add(sheet);
-        }
-        foreach (var sheet in unchangedSheets)
-        {
-            sheet.ActivityTime = activity.SheetActivities.First(s => s.SheetId == sheet.SheetId).ActivityTime;
-        }
+        toUpdate.SheetActivities.Clear();
+        _activityRepository.Update(toUpdate);
 
-        var clubId = _activityRepository.GetClubId();
 
-        foreach (var sheet in toUpdate.SheetActivities)
+        foreach (var incoming in activity.SheetActivities)
         {
-            sheet.ClubId = clubId;
-            sheet.ActivityTime.ClubId = clubId;
-        }
+            var sheet = new SheetActivity
+            {
+                Id = Guid.NewGuid(),
+                SheetId = incoming.SheetId,
+                ActivityId = toUpdate.Id,
+                ClubId = toUpdate.ClubId,
+                ActivityTime = new DateTimeRange
+                {
+                    Id = Guid.NewGuid(),
+                    ClubId = toUpdate.ClubId,
+                    Start = incoming.ActivityTime.Start,
+                    End = incoming.ActivityTime.End,
+                    MinutesBlockedBefore = incoming.ActivityTime.MinutesBlockedBefore,
+                    MinutesBlockedAfter = incoming.ActivityTime.MinutesBlockedAfter
+                },
 
+            };
+            foreach(var instructor in incoming.LinkedInstructors)
+            {
+                sheet.LinkedInstructors.Add(new LinkedInstructor()
+                {
+                    Id = Guid.NewGuid(),
+                    ClubId = toUpdate.ClubId,
+                    UserIdentity = instructor.UserIdentity
+                });
+            }
+            toUpdate.SheetActivities.Add(_sheetActivityRepository.Create(sheet));
+        }
         return _activityRepository.Update(toUpdate);
     }
 }

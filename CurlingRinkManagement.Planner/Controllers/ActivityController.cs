@@ -11,13 +11,29 @@ public class ActivityController(IActivityService activityService) : ControllerBa
     private readonly IActivityService _activityService = activityService;
 
     [HttpGet]
-    [Route("{sheetId?}")]
-    public IActionResult Get(Guid sheetId, [FromQuery] DateTime start, [FromQuery] DateTime end)
+
+    public IActionResult Get([FromQuery] Guid sheetId, [FromQuery] DateTime start, [FromQuery] DateTime end)
     {
         try
         {
             var activities = _activityService.GetAllOnSheet(sheetId, start, end);
             var converted = activities.Select(ActivityModel.FromActivity);
+            return Ok(converted);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("{activityId?}")]
+    public IActionResult GetById(Guid activityId)
+    {
+        try
+        {
+            var activity = _activityService.GetById(activityId);
+            var converted = ActivityModel.FromActivity(activity);
             return Ok(converted);
         }
         catch (Exception ex)

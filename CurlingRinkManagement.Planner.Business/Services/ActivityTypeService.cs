@@ -33,6 +33,9 @@ public class ActivityTypeService(IClubRepository<ActivityType> activityTypeRepos
         toUpdate.RecommendedMinutesBlockedAfter = activityType.RecommendedMinutesBlockedAfter;
         toUpdate.Color = activityType.Color;
         toUpdate.Type = activityType.Type;
+        toUpdate.InstructorCalculationType = activityType.InstructorCalculationType;
+        toUpdate.AmountOfInstructors = activityType.AmountOfInstructors;
+        toUpdate.PerSelectedValue = activityType.PerSelectedValue;
         return _activityTypeRepository.Update(toUpdate);
     }
 }

@@ -1,2 +1,10 @@
 cd api
 dotnet ef migrations add {name} --project=../{Data Project} --context={contextName}
+dotnet ef database update --context={contextName}
+
+
+
+--planner
+cd CurlingRinkManagement.Planner
+dotnet ef migrations add {name} --project=../CurlingRinkManagement.Planner.Data --context=PlannerDataContext
+dotnet ef database update --context=PlannerDataContext

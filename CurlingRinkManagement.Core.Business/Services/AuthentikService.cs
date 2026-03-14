@@ -41,11 +41,11 @@ public class AuthentikService : IUserdataService
         return token;
     }
 
-    public async Task<AuthentikUsersResponse> GetUser(string group)
+    public async Task<AuthentikUsersResponse> GetUsers(string group, string? search)
     {
         var httpClient = new HttpClient();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, $"{_url}/api/v3/core/users/?groups_by_name={group}");
+        var request = new HttpRequestMessage(HttpMethod.Get, $"{_url}/api/v3/core/users/?groups_by_name={group}&search={search}");
         var token = await GetAccessToken();
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("Authorization", $"Bearer {token}");
@@ -57,5 +57,6 @@ public class AuthentikService : IUserdataService
 
         return deserialized;
     }
+
 }
 
