@@ -4,7 +4,7 @@ using CurlingRinkManagement.Planner.Business.Services;
 using CurlingRinkManagement.Planner.Data.DatabaseModels;
 using Moq;
 
-namespace CurlingRinkManagement.Planner.Business.Tests;
+namespace CurlingRinkManagement.Planner.Tests.Business;
 
 [TestClass]
 public class ContactServiceFilterTests

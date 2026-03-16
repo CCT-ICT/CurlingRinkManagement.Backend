@@ -5,7 +5,7 @@ using CurlingRinkManagement.Planner.Data.DatabaseModels;
 using CurlingRinkManagement.Planner.Data.Enums;
 using Moq;
 
-namespace CurlingRinkManagement.Planner.Business.Tests;
+namespace CurlingRinkManagement.Planner.Tests.Business;
 
 [TestClass]
 public class CustomerRequestServiceFilterTests

@@ -4,7 +4,7 @@ using CurlingRinkManagement.Planner.Business.Services;
 using CurlingRinkManagement.Common.Data.Database;
 using CurlingRinkManagement.Planner.Data.DatabaseModels;
 
-namespace CurlingRinkManagement.Planner.Business.Tests;
+namespace CurlingRinkManagement.Planner.Tests.Business;
 
 [TestClass]
 public class ActivityServiceTests
