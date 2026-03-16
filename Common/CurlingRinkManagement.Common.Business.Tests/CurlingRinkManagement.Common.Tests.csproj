@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CurlingRinkManagement.Common.Data\CurlingRinkManagement.Common.Data.csproj" />
+    <ProjectReference Include="..\..\CurlingRinkManagement.Common.MiddleWare\CurlingRinkManagement.Common.Api.csproj" />
     <ProjectReference Include="..\CurlingRinkManagement.Common.Business\CurlingRinkManagement.Common.Business.csproj" />
   </ItemGroup>
 

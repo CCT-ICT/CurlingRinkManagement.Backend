@@ -10,12 +10,13 @@ public class ClubValidationMiddleware(RequestDelegate _next, ILogger<ClubValidat
     // IMessageWriter is injected into InvokeAsync
     public async Task InvokeAsync(HttpContext httpContext, IBaseRepository<Club> _clubRepository)
     {
+#if DEBUG
         if (httpContext.Request.Path.Value?.Contains("swagger", StringComparison.CurrentCultureIgnoreCase) ?? false)
         {
             await _next(httpContext);
             return;
         }
-
+#endif
 
         var groups = httpContext.User.Claims.Where(c => c.Type == "groups").Select(c => c.Value).ToList();
         if (!httpContext.Request.Headers.TryGetValue("X-Club-Id", out var clubId))

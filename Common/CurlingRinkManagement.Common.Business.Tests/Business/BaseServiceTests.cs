@@ -2,7 +2,7 @@
 using CurlingRinkManagement.Common.Data.Database;
 using Moq;
 
-namespace CurlingRinkManagement.Tests.Services;
+namespace CurlingRinkManagement.Common.Tests.Business;
 
 [TestClass]
 public class BaseServiceTests

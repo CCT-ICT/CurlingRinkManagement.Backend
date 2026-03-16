@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlingRinkManagement.Commo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlingRinkManagement.Planner.Business.Tests", "CurlingRinkManagement.Planner.Business.Tests\CurlingRinkManagement.Planner.Business.Tests.csproj", "{0B179402-CC9C-4F65-B5C3-BE82DA9B563A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlingRinkManagement.Common.Business.Tests", "Common\CurlingRinkManagement.Common.Business.Tests\CurlingRinkManagement.Common.Business.Tests.csproj", "{0274C674-741A-43B3-9326-7DA3B01D872D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlingRinkManagement.Common.Tests", "Common\CurlingRinkManagement.Common.Business.Tests\CurlingRinkManagement.Common.Tests.csproj", "{0274C674-741A-43B3-9326-7DA3B01D872D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
