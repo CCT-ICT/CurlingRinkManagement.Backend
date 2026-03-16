@@ -19,13 +19,12 @@ public class ClubValidationMiddleware(RequestDelegate _next, ILogger<ClubValidat
 #endif
 
         var groups = httpContext.User.Claims.Where(c => c.Type == "groups").Select(c => c.Value).ToList();
-        if (!httpContext.Request.Headers.TryGetValue("X-Club-Id", out var clubId))
+        if (!httpContext.Request.Headers.TryGetValue("X-Club-Id", out var clubId) || !Guid.TryParse(clubId.First(), out var id))
         {
             _logger.LogTrace("No club id header defined");
             httpContext.Response.StatusCode = 400;
             return;
         }
-        var id = Guid.Parse(clubId.First()!);
 
         if (_clubRepository.GetAll().Any(c => c.Id == id && groups.Contains(c.ClubGroup)))
         {
