@@ -19,7 +19,7 @@ public abstract class BaseService<Entity>(IClubRepository<Entity> entityReposito
     //Add pagination
     public virtual List<Entity> GetAll(int? page, int? amount, string[]? filters, string[]? filterValues)
     {
-        var query = _entityRepository.GetAll();
+        var query = AddIncludes( _entityRepository.GetAll());
         if (filters != null && filterValues != null)
         {
             query = AddFilter(query, filters, filterValues);
@@ -53,10 +53,15 @@ public abstract class BaseService<Entity>(IClubRepository<Entity> entityReposito
 
     public virtual Entity GetById(Guid id)
     {
-        var entity = _entityRepository.GetAll().FirstOrDefault(e => e.Id == id);
+        var entity = AddIncludes(_entityRepository.GetAll()).FirstOrDefault(e => e.Id == id);
         if (entity == null)
             throw new KeyNotFoundException($"No {typeof(Entity).Name} with id {id} found");
         return entity;
+    }
+
+    public virtual IQueryable<Entity> AddIncludes(IQueryable<Entity> query)
+    {
+        return query;
     }
 
     public abstract Entity Update(Entity entity);

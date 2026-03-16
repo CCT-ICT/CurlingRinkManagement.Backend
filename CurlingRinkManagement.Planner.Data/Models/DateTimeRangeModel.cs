@@ -18,8 +18,6 @@ public class DateTimeRangeModel
             Id = Id,
             Start = Start,
             End = End,
-            MinutesBlockedBefore = MinutesBlockedBefore,
-            MinutesBlockedAfter = MinutesBlockedAfter,
         };
     }
 
@@ -30,8 +28,6 @@ public class DateTimeRangeModel
             Id = dateTimeRange.Id,
             Start = dateTimeRange.Start,
             End = dateTimeRange.End,
-            MinutesBlockedBefore = dateTimeRange.MinutesBlockedBefore,
-            MinutesBlockedAfter = dateTimeRange.MinutesBlockedAfter,
         };
     }
 }

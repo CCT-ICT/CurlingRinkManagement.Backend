@@ -1,5 +1,4 @@
 ﻿using CurlingRinkManagement.Common.Data.Database;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CurlingRinkManagement.Planner.Data.DatabaseModels;
 public class LinkedInstructor : IClubEntity

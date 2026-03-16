@@ -5,6 +5,12 @@ using CurlingRinkManagement.Core.Data.Models.Dto;
 namespace CurlingRinkManagement.Core.Business.Services;
 public class UserService(IUserdataService userdataService) : IUserService
 {
+    public async Task<Guid> GetMyId(string group, string email, string uid)
+    {
+        var response = await userdataService.GetUsers(group, email);
+        return response.Results.FirstOrDefault(r => r.Uid == uid)?.Uuid ?? throw new KeyNotFoundException("No user");
+    }
+
     public async Task<UserData> GetUsers(string group, string? search)
     {
         var users = await userdataService.GetUsers(group, search);

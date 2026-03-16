@@ -1,9 +1,7 @@
 ﻿
 
 using CurlingRinkManagement.Common.Api.Middleware;
-using CurlingRinkManagement.Common.Data.Database;
 using CurlingRinkManagement.Core.Data.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

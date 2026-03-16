@@ -6,23 +6,36 @@ namespace CurlingRinkManagement.Planner.Controllers;
 
 [ApiController]
 [Route("Api/[controller]")]
-public class ActivityController(IActivityService activityService) : ControllerBase
+public class ActivityController(IActivityService _activityService) : ControllerBase
 {
-    private readonly IActivityService _activityService = activityService;
 
-    [HttpGet]
-
-    public IActionResult Get([FromQuery] Guid sheetId, [FromQuery] DateTime start, [FromQuery] DateTime end)
+    [HttpPut]
+    [Route("{activityId?}/{sheetActivityId?}/{instructorId?}")]
+    public IActionResult AddInstructor(Guid activityId, Guid sheetActivityId, string instructorId)
     {
         try
         {
-            var activities = _activityService.GetAllOnSheet(sheetId, start, end);
-            var converted = activities.Select(ActivityModel.FromActivity);
-            return Ok(converted);
+            _activityService.AddInstructor(instructorId, activityId, sheetActivityId);
+            return Ok();
         }
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet]
+    public IActionResult Get([FromQuery] int? page, [FromQuery] int? amount, [FromQuery] string[]? filters, [FromQuery] string[]? filterValues)
+    {
+        try
+        {
+            var result = _activityService.GetAll(page, amount, filters, filterValues);
+            var converted = result.Select(ActivityModel.FromActivity);
+            return Ok(converted);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 
@@ -71,6 +84,23 @@ public class ActivityController(IActivityService activityService) : ControllerBa
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpDelete]
+    [Route("{activityId?}")]
+    public IActionResult Delete(Guid activityId)
+    {
+        try
+        {
+            _activityService.Delete(activityId);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+
 
 
 }

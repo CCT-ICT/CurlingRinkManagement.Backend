@@ -9,45 +9,44 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CurlingRinkManagement.Core.Data.Migrations
+namespace CurlingRinkManagement.Core.Data.Migrations;
+
+[DbContext(typeof(CoreDataContext))]
+[Migration("20250505200259_AddedClub")]
+partial class AddedClub
 {
-    [DbContext(typeof(CoreDataContext))]
-    [Migration("20250505200259_AddedClub")]
-    partial class AddedClub
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "9.0.4")
+            .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+        NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CurlingRinkManagement.Core.Data.DatabaseModels.Club", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("CurlingRinkManagement.Core.Data.DatabaseModels.Club", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("ClubAbbriviation")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("ClubAbbriviation")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("ClubGroup")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("ClubGroup")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("ClubName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("ClubName")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Clubs");
-                });
+                b.ToTable("Clubs");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }

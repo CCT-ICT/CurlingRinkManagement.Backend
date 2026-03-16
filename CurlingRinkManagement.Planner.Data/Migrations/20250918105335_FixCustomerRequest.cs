@@ -2,35 +2,34 @@
 
 #nullable disable
 
-namespace CurlingRinkManagement.Planner.Data.Migrations
+namespace CurlingRinkManagement.Planner.Data.Migrations;
+
+/// <inheritdoc />
+public partial class FixCustomerRequest : Migration
 {
     /// <inheritdoc />
-    public partial class FixCustomerRequest : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AlterColumn<float>(
-                name: "CustomPrice",
-                table: "CustomerRequests",
-                type: "real",
-                nullable: true,
-                oldClrType: typeof(float),
-                oldType: "real");
-        }
+        migrationBuilder.AlterColumn<float>(
+            name: "CustomPrice",
+            table: "CustomerRequests",
+            type: "real",
+            nullable: true,
+            oldClrType: typeof(float),
+            oldType: "real");
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AlterColumn<float>(
-                name: "CustomPrice",
-                table: "CustomerRequests",
-                type: "real",
-                nullable: false,
-                defaultValue: 0f,
-                oldClrType: typeof(float),
-                oldType: "real",
-                oldNullable: true);
-        }
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.AlterColumn<float>(
+            name: "CustomPrice",
+            table: "CustomerRequests",
+            type: "real",
+            nullable: false,
+            defaultValue: 0f,
+            oldClrType: typeof(float),
+            oldType: "real",
+            oldNullable: true);
     }
 }

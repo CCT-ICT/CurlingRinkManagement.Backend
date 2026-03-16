@@ -29,8 +29,6 @@ public class ActivityTypeService(IClubRepository<ActivityType> activityTypeRepos
     public ActivityType Update(ActivityType activityType)
     {
         var toUpdate = GetById(activityType.Id);
-        toUpdate.RecommendedMinutesBlockedBefore = activityType.RecommendedMinutesBlockedBefore;
-        toUpdate.RecommendedMinutesBlockedAfter = activityType.RecommendedMinutesBlockedAfter;
         toUpdate.Color = activityType.Color;
         toUpdate.Type = activityType.Type;
         toUpdate.InstructorCalculationType = activityType.InstructorCalculationType;

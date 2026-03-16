@@ -3,6 +3,11 @@ public enum GenericFilters
 {
     Generic,
     Name,
-    CustomerRequestState
+    CustomerRequestState,
+    SheetId,
+    StartDate,
+    EndDate,
+    InstructorId,
+    MissingInstructors
 }
 

@@ -9,8 +9,6 @@ public class ActivityType : IClubEntity
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Type { get; set; } = string.Empty;
     public string Color { get; set; } = string.Empty;
-    public int RecommendedMinutesBlockedBefore { get; set; }
-    public int RecommendedMinutesBlockedAfter { get; set; }
     public int AmountOfInstructors { get; set; }
     public CalculationType InstructorCalculationType { get; set; }
     public int PerSelectedValue { get; set; }
