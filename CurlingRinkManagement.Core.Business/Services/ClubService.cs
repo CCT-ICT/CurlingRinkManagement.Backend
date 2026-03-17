@@ -15,4 +15,12 @@ public class ClubService(IBaseRepository<Club> _clubRepository) : IClubService
     {
         return _clubRepository.Create(club);
     }
+
+    public Club GetClubById(Guid id)
+    {
+        var club = _clubRepository.GetAll().FirstOrDefault(c => c.Id == id);
+        if (club == null) throw new Exception("No club found");
+
+        return club;
+    }
 }

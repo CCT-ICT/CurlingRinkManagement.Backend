@@ -42,9 +42,9 @@ public class ClubRepository<TEntity>(DbContext _dataContext, IHttpContextAccesso
         {
             throw new Exception("User can't delete this object. Club ids don't match");
         }
-        var returned = _dataContext.Update(entity);
+        //var returned = _dataContext.Update(entity);
         _dataContext.SaveChanges();
-        return returned.Entity;
+        return entity;
     }
 
     public Guid GetClubId()

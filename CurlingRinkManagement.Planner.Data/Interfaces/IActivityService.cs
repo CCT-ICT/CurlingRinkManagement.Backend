@@ -1,14 +1,12 @@
 ﻿
 
+using CurlingRinkManagement.Common.Data.Interfaces;
 using CurlingRinkManagement.Planner.Data.DatabaseModels;
 
 namespace CurlingRinkManagement.Planner.Data.Interfaces;
 
-public interface IActivityService
+public interface IActivityService : IBaseService<Activity>
 {
-    public Activity Create(Activity activity);
-    public void Delete(Guid id);
-    public Activity Update(Activity activity);
-    public List<Activity> GetAllOnSheet(Guid sheetId, DateTime start, DateTime end);
+    void AddInstructor(string instructorId, Guid activityId, Guid sheetActivityId);
 }
 

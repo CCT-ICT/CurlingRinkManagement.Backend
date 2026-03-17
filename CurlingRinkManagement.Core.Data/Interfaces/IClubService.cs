@@ -4,6 +4,7 @@ namespace CurlingRinkManagement.Core.Data.Interfaces;
 public interface IClubService
 {
     Club Create(Club club);
+    Club GetClubById(Guid id);
     List<Club> GetClubs(List<string> groups);
 }
 

@@ -7,6 +7,8 @@ public class SheetActivity : IClubEntity
     public Guid ClubId { get; set; } = Guid.Empty;
     public Guid Id { get; set; }
     public DateTimeRange ActivityTime { get; set; } = new();
+    public List<LinkedInstructor> LinkedInstructors { get; set; } = [];
+    public int AmountOfInstructors { get; set; } = 0;
 
     //references
     [ForeignKey("Sheet")]

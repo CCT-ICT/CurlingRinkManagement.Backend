@@ -8,7 +8,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCoreDatabase(builder.Configuration);
-builder.Services.AddScoped<IClubService, ClubService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services
+    .AddScoped<IClubService, ClubService>()
+    .AddScoped<IUserService, UserService>()
+    .AddScoped<IUserdataService, AuthentikService>();
 builder.Services.AddGenericAuthentication(builder.Configuration);
 
 //Make Cors stricter at some point

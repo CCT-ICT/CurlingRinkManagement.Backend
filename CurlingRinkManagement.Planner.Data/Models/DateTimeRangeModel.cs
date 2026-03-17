@@ -1,5 +1,4 @@
 ﻿using CurlingRinkManagement.Planner.Data.DatabaseModels;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CurlingRinkManagement.Planner.Data.Models;
 
@@ -11,7 +10,6 @@ public class DateTimeRangeModel
     public int MinutesBlockedBefore { get; set; }
     public int MinutesBlockedAfter { get; set; }
 
-    public Guid SheetActivityId { get; set; }
 
     public DateTimeRange ToDateTimeRange()
     {
@@ -20,9 +18,6 @@ public class DateTimeRangeModel
             Id = Id,
             Start = Start,
             End = End,
-            MinutesBlockedBefore = MinutesBlockedBefore,
-            MinutesBlockedAfter = MinutesBlockedAfter,
-            SheetActivityId = SheetActivityId,
         };
     }
 
@@ -33,9 +28,6 @@ public class DateTimeRangeModel
             Id = dateTimeRange.Id,
             Start = dateTimeRange.Start,
             End = dateTimeRange.End,
-            MinutesBlockedBefore = dateTimeRange.MinutesBlockedBefore,
-            MinutesBlockedAfter = dateTimeRange.MinutesBlockedAfter,
-            SheetActivityId = dateTimeRange.Activity != null? dateTimeRange.Activity.Id : dateTimeRange.SheetActivityId,
         };
     }
 }

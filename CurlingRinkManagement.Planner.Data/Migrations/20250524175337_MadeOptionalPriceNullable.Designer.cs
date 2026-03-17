@@ -9,353 +9,352 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CurlingRinkManagement.Planner.Data.Migrations
+namespace CurlingRinkManagement.Planner.Data.Migrations;
+
+[DbContext(typeof(PlannerDataContext))]
+[Migration("20250524175337_MadeOptionalPriceNullable")]
+partial class MadeOptionalPriceNullable
 {
-    [DbContext(typeof(PlannerDataContext))]
-    [Migration("20250524175337_MadeOptionalPriceNullable")]
-    partial class MadeOptionalPriceNullable
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "9.0.4")
+            .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+        NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ContactTag", b =>
-                {
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("ContactTag", b =>
+            {
+                b.Property<Guid>("ContactId")
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid>("TagsId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("TagsId")
+                    .HasColumnType("uuid");
 
-                    b.HasKey("ContactId", "TagsId");
+                b.HasKey("ContactId", "TagsId");
 
-                    b.HasIndex("TagsId");
+                b.HasIndex("TagsId");
 
-                    b.ToTable("ContactTag");
-                });
+                b.ToTable("ContactTag");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid>("ActivityTypeId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ActivityTypeId")
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ClubId")
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CustomerRequestId")
-                        .HasColumnType("uuid");
+                b.Property<Guid?>("CustomerRequestId")
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Title")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ActivityTypeId");
+                b.HasIndex("ActivityTypeId");
 
-                    b.ToTable("Activities");
-                });
+                b.ToTable("Activities");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.ActivityType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.ActivityType", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ClubId")
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Color")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<int>("RecommendedMinutesBlockedAfter")
-                        .HasColumnType("integer");
+                b.Property<int>("RecommendedMinutesBlockedAfter")
+                    .HasColumnType("integer");
 
-                    b.Property<int>("RecommendedMinutesBlockedBefore")
-                        .HasColumnType("integer");
+                b.Property<int>("RecommendedMinutesBlockedBefore")
+                    .HasColumnType("integer");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Type")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("ActivityTypes");
-                });
+                b.ToTable("ActivityTypes");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Contact", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Contact", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("AdditionalInfo")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("AdditionalInfo")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ClubId")
+                    .HasColumnType("uuid");
 
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("timestamp with time zone");
+                b.Property<DateTime>("DateAdded")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("FirstName")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("LastName")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("PhoneNumber")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<string>("Prefix")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Prefix")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ClubId", "Email")
-                        .IsUnique();
+                b.HasIndex("ClubId", "Email")
+                    .IsUnique();
 
-                    b.ToTable("Contacts");
-                });
+                b.ToTable("Contacts");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.CustomerRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.CustomerRequest", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ActivityId")
-                        .HasColumnType("uuid");
+                b.Property<Guid?>("ActivityId")
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("AdditionalInfo")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("AdditionalInfo")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<int>("AmountOfPeople")
-                        .HasColumnType("integer");
+                b.Property<int>("AmountOfPeople")
+                    .HasColumnType("integer");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ClubId")
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ContactId")
+                    .HasColumnType("uuid");
 
-                    b.Property<float>("CustomPrice")
-                        .HasColumnType("real");
+                b.Property<float>("CustomPrice")
+                    .HasColumnType("real");
 
-                    b.Property<string>("CustomPriceReason")
-                        .HasColumnType("text");
+                b.Property<string>("CustomPriceReason")
+                    .HasColumnType("text");
 
-                    b.Property<int>("CustomerRequestState")
-                        .HasColumnType("integer");
+                b.Property<int>("CustomerRequestState")
+                    .HasColumnType("integer");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Title")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ActivityId");
+                b.HasIndex("ActivityId");
 
-                    b.HasIndex("ContactId");
+                b.HasIndex("ContactId");
 
-                    b.ToTable("CustomerRequests");
-                });
+                b.ToTable("CustomerRequests");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Sheet", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Sheet", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ClubId")
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
+                b.Property<int>("Order")
+                    .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Sheets");
-                });
+                b.ToTable("Sheets");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("uuid");
+                b.Property<Guid>("ClubId")
+                    .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("uuid");
+                b.Property<Guid?>("ParentId")
+                    .HasColumnType("uuid");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Title")
+                    .IsRequired()
+                    .HasColumnType("text");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
+                b.HasIndex("ParentId");
 
-                    b.ToTable("Tags");
-                });
+                b.ToTable("Tags");
+            });
 
-            modelBuilder.Entity("ContactTag", b =>
-                {
-                    b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Contact", null)
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("ContactTag", b =>
+            {
+                b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Contact", null)
+                    .WithMany()
+                    .HasForeignKey("ContactId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", null)
+                    .WithMany()
+                    .HasForeignKey("TagsId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", b =>
-                {
-                    b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.ActivityType", "ActivityType")
-                        .WithMany()
-                        .HasForeignKey("ActivityTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", b =>
+            {
+                b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.ActivityType", "ActivityType")
+                    .WithMany()
+                    .HasForeignKey("ActivityTypeId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.DateTimeRange", "PlannedDates", b1 =>
-                        {
-                            b1.Property<Guid>("ActivityId")
-                                .HasColumnType("uuid");
+                b.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.DateTimeRange", "PlannedDates", b1 =>
+                    {
+                        b1.Property<Guid>("ActivityId")
+                            .HasColumnType("uuid");
 
-                            b1.Property<Guid>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uuid");
+                        b1.Property<Guid>("Id")
+                            .ValueGeneratedOnAdd()
+                            .HasColumnType("uuid");
 
-                            b1.Property<Guid>("ClubId")
-                                .HasColumnType("uuid");
+                        b1.Property<Guid>("ClubId")
+                            .HasColumnType("uuid");
 
-                            b1.Property<DateTime>("End")
-                                .HasColumnType("timestamp with time zone");
+                        b1.Property<DateTime>("End")
+                            .HasColumnType("timestamp with time zone");
 
-                            b1.Property<int>("MinutesBlockedAfter")
-                                .HasColumnType("integer");
+                        b1.Property<int>("MinutesBlockedAfter")
+                            .HasColumnType("integer");
 
-                            b1.Property<int>("MinutesBlockedBefore")
-                                .HasColumnType("integer");
+                        b1.Property<int>("MinutesBlockedBefore")
+                            .HasColumnType("integer");
 
-                            b1.Property<DateTime>("Start")
-                                .HasColumnType("timestamp with time zone");
+                        b1.Property<DateTime>("Start")
+                            .HasColumnType("timestamp with time zone");
 
-                            b1.HasKey("ActivityId", "Id");
+                        b1.HasKey("ActivityId", "Id");
 
-                            b1.ToTable("DateTimeRanges");
+                        b1.ToTable("DateTimeRanges");
 
-                            b1.WithOwner("Activity")
-                                .HasForeignKey("ActivityId");
+                        b1.WithOwner("Activity")
+                            .HasForeignKey("ActivityId");
 
-                            b1.Navigation("Activity");
-                        });
+                        b1.Navigation("Activity");
+                    });
 
-                    b.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.SheetActivity", "Sheets", b1 =>
-                        {
-                            b1.Property<Guid>("ActivityId")
-                                .HasColumnType("uuid");
+                b.OwnsMany("CurlingRinkManagement.Planner.Data.DatabaseModels.SheetActivity", "Sheets", b1 =>
+                    {
+                        b1.Property<Guid>("ActivityId")
+                            .HasColumnType("uuid");
 
-                            b1.Property<Guid>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uuid");
+                        b1.Property<Guid>("Id")
+                            .ValueGeneratedOnAdd()
+                            .HasColumnType("uuid");
 
-                            b1.Property<Guid>("ClubId")
-                                .HasColumnType("uuid");
+                        b1.Property<Guid>("ClubId")
+                            .HasColumnType("uuid");
 
-                            b1.Property<Guid>("SheetId")
-                                .HasColumnType("uuid");
+                        b1.Property<Guid>("SheetId")
+                            .HasColumnType("uuid");
 
-                            b1.HasKey("ActivityId", "Id");
+                        b1.HasKey("ActivityId", "Id");
 
-                            b1.HasIndex("SheetId");
+                        b1.HasIndex("SheetId");
 
-                            b1.ToTable("SheetActivity");
+                        b1.ToTable("SheetActivity");
 
-                            b1.WithOwner("Activity")
-                                .HasForeignKey("ActivityId");
+                        b1.WithOwner("Activity")
+                            .HasForeignKey("ActivityId");
 
-                            b1.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Sheet", "Sheet")
-                                .WithMany()
-                                .HasForeignKey("SheetId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
+                        b1.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Sheet", "Sheet")
+                            .WithMany()
+                            .HasForeignKey("SheetId")
+                            .OnDelete(DeleteBehavior.Cascade)
+                            .IsRequired();
 
-                            b1.Navigation("Activity");
+                        b1.Navigation("Activity");
 
-                            b1.Navigation("Sheet");
-                        });
+                        b1.Navigation("Sheet");
+                    });
 
-                    b.Navigation("ActivityType");
+                b.Navigation("ActivityType");
 
-                    b.Navigation("PlannedDates");
+                b.Navigation("PlannedDates");
 
-                    b.Navigation("Sheets");
-                });
+                b.Navigation("Sheets");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.CustomerRequest", b =>
-                {
-                    b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", "Activity")
-                        .WithMany("CustomerRequests")
-                        .HasForeignKey("ActivityId");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.CustomerRequest", b =>
+            {
+                b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", "Activity")
+                    .WithMany("CustomerRequests")
+                    .HasForeignKey("ActivityId");
 
-                    b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Contact", "Contact")
+                    .WithMany()
+                    .HasForeignKey("ContactId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Activity");
+                b.Navigation("Activity");
 
-                    b.Navigation("Contact");
-                });
+                b.Navigation("Contact");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", b =>
-                {
-                    b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId");
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", b =>
+            {
+                b.HasOne("CurlingRinkManagement.Planner.Data.DatabaseModels.Tag", "Parent")
+                    .WithMany()
+                    .HasForeignKey("ParentId");
 
-                    b.Navigation("Parent");
-                });
+                b.Navigation("Parent");
+            });
 
-            modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", b =>
-                {
-                    b.Navigation("CustomerRequests");
-                });
+        modelBuilder.Entity("CurlingRinkManagement.Planner.Data.DatabaseModels.Activity", b =>
+            {
+                b.Navigation("CustomerRequests");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }

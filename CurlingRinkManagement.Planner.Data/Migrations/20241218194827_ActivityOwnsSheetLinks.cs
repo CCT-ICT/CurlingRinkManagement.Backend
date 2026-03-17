@@ -2,44 +2,43 @@
 
 #nullable disable
 
-namespace CurlingRinkManagement.Planner.Data.Migrations
+namespace CurlingRinkManagement.Planner.Data.Migrations;
+
+/// <inheritdoc />
+public partial class ActivityOwnsSheetLinks : Migration
 {
     /// <inheritdoc />
-    public partial class ActivityOwnsSheetLinks : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_SheetActivity",
-                table: "SheetActivity");
+        migrationBuilder.DropPrimaryKey(
+            name: "PK_SheetActivity",
+            table: "SheetActivity");
 
-            migrationBuilder.DropIndex(
-                name: "IX_SheetActivity_ActivityId",
-                table: "SheetActivity");
+        migrationBuilder.DropIndex(
+            name: "IX_SheetActivity_ActivityId",
+            table: "SheetActivity");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_SheetActivity",
-                table: "SheetActivity",
-                columns: new[] { "ActivityId", "Id" });
-        }
+        migrationBuilder.AddPrimaryKey(
+            name: "PK_SheetActivity",
+            table: "SheetActivity",
+            columns: new[] { "ActivityId", "Id" });
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_SheetActivity",
-                table: "SheetActivity");
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropPrimaryKey(
+            name: "PK_SheetActivity",
+            table: "SheetActivity");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_SheetActivity",
-                table: "SheetActivity",
-                column: "Id");
+        migrationBuilder.AddPrimaryKey(
+            name: "PK_SheetActivity",
+            table: "SheetActivity",
+            column: "Id");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_SheetActivity_ActivityId",
-                table: "SheetActivity",
-                column: "ActivityId");
-        }
+        migrationBuilder.CreateIndex(
+            name: "IX_SheetActivity_ActivityId",
+            table: "SheetActivity",
+            column: "ActivityId");
     }
 }
