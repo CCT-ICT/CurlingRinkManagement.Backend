@@ -5,6 +5,7 @@ using CurlingRinkManagement.Planner.Data.DatabaseModels;
 using CurlingRinkManagement.Planner.Data.Enums;
 using CurlingRinkManagement.Planner.Data.Interfaces;
 namespace CurlingRinkManagement.Planner.Business.Services;
+
 public class CustomerRequestService(IClubRepository<CustomerRequest> _customerRequestRepo) : BaseService<CustomerRequest>(_customerRequestRepo), ICustomerRequestService
 {
 
@@ -33,11 +34,27 @@ public class CustomerRequestService(IClubRepository<CustomerRequest> _customerRe
                 continue;
             switch (parsedFilter)
             {
-                case GenericFilters.CustomerRequestState:
-                    if (!Enum.TryParse<CustomerRequestState>(filterValue, out var state))
-                        break;
+                case GenericFilters.Generic:
+                    filterValue = filterValues[i]?.ToLower().Replace(" ", "") ?? "";
+                    query = query.Where(c => c.Title.ToLower().Contains(filterValue) ||
+                    (c.Contact != null &&
+                    (c.Contact.Email.ToLower().Contains(filterValue) ||
+                         c.Contact.PhoneNumber.ToLower().Contains(filterValue) ||
+                         (c.Contact.FirstName + c.Contact.Prefix + c.Contact.LastName).ToLower().Contains(filterValue))));
+                    break;
 
-                    query = query.Where(c => c.CustomerRequestState == state);
+                case GenericFilters.CustomerRequestState:
+                    var states = filterValue.Split(';');
+                    var parsedStates = new List<CustomerRequestState>();
+
+                    foreach (var state in states)
+                    {
+                        if (!Enum.TryParse<CustomerRequestState>(state, out var parsedState))
+                            continue;
+                        parsedStates.Add(parsedState);
+
+                    }
+                    query = query.Where(c => parsedStates.Contains(c.CustomerRequestState));
                     break;
             }
         }
